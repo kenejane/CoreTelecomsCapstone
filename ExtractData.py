@@ -200,5 +200,5 @@ with DAG(
     fetch_customers_task >> upload_customers_task
     fetch_call_logs_task >> upload_call_logs_task
     fetch_social_media_task >> upload_social_media_task
-    agents_task  # Run Google Sheet task after social media fetch
+    agents_task 
     website_forms_task

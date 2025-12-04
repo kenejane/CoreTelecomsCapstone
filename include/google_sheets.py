@@ -13,10 +13,10 @@ def fetch_agents_sheet(service_account_info: dict, spreadsheet_id: str, sheet_na
         sheet_name: str, worksheet name
         local_csv_path: str, path to save CSV
     """
-    # Define API scopes
+    #API scope definition
     scope = ['https://www.googleapis.com/auth/spreadsheets']
 
-    # Authenticate
+    # Authentication
     creds = ServiceAccountCredentials.from_json_keyfile_dict(service_account_info, scope)
     client = gspread.authorize(creds)
 

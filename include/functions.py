@@ -1,8 +1,3 @@
-"""
-Airflow 3.x compatible functions for CoreTelecomsCapstone
-Uses Airflow UI connections for AWS and Postgres
-"""
-
 import tempfile
 import json
 
