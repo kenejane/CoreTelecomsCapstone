@@ -193,9 +193,7 @@ services:
       airflow-apiserver:
         condition: service_healthy
       airflow-init:
-        condition: service_completed_successfully
-    AIRFLOW__CORE__FERNET_KEY: 'JI6sMk5uMPKXrCbEdEyBXwPtD_95UjU5M8LRVTqKeOY=''
-    AIRFLOW__WEBSERVER__SECRET_KEY: 'mysecretkey3456'    
+        condition: service_completed_successfully 
 
   airflow-triggerer:
     <<: *airflow-common
@@ -210,9 +208,7 @@ services:
     depends_on:
       <<: *airflow-common-depends-on
       airflow-init:
-        condition: service_completed_successfully
-    AIRFLOW__CORE__FERNET_KEY: 'JI6sMk5uMPKXrCbEdEyBXwPtD_95UjU5M8LRVTqKeOY=''
-    AIRFLOW__WEBSERVER__SECRET_KEY: 'mysecretkey3456'    
+        condition: service_completed_successfully   
 
   airflow-init:
     <<: *airflow-common
@@ -303,8 +299,6 @@ services:
       _AIRFLOW_WWW_USER_CREATE: 'true'
       _AIRFLOW_WWW_USER_USERNAME: ${_AIRFLOW_WWW_USER_USERNAME:-airflow}
       _AIRFLOW_WWW_USER_PASSWORD: ${_AIRFLOW_WWW_USER_PASSWORD:-airflow}
-      AIRFLOW__CORE__FERNET_KEY: 'JI6sMk5uMPKXrCbEdEyBXwPtD_95UjU5M8LRVTqKeOY=''
-      AIRFLOW__WEBSERVER__SECRET_KEY: 'mysecretkey3456'
       _PIP_ADDITIONAL_REQUIREMENTS: ''
     user: "0:0"
 
