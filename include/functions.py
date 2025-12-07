@@ -9,6 +9,11 @@ from airflow.hooks.base import BaseHook
 from airflow.providers.postgres.hooks.postgres import PostgresHook
 
 
+# Forcing non-distributed mode so boto3_session is allowed
+wr.engine.set("python")
+wr.memory_format.set("pandas")
+
+
 # -----------------------------
 # AWS S3 CLIENT USING UI CONNECTION
 # -----------------------------

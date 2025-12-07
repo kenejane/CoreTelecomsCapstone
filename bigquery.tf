@@ -23,7 +23,7 @@ locals {
   bq_dataset_id = "coretelecoms_raw"
 }
 
-# Dataset that can be referenced by dbt profiles.yml
+# Dataset that can be referenced by dbt profiles.yml]
 resource "google_bigquery_dataset" "coretelecoms_raw" {
   dataset_id    = local.bq_dataset_id
   friendly_name = "CoreTelecoms Raw Layer"

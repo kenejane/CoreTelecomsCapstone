@@ -37,7 +37,7 @@ POSTGRES_CONN_ID = "CORE_TELECOMS_POSTGRES_CONN"
 G_SHEETS_CONN_ID = "GOOGLE_SHEETS_API_CONN"
 
 SOURCE_BUCKET = "core-telecoms-data-lake"
-DESTINATION_BUCKET = "core-telecoms-capstone-data-lake"
+DESTINATION_BUCKET = "coretelecoms-capstone-data-lake"
 POSTGRES_SCHEMA = "customer_complaints"
 
 

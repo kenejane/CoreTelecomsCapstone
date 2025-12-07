@@ -56,6 +56,7 @@ x-airflow-common:
   environment:
     &airflow-common-env
     AIRFLOW__CORE__EXECUTOR: CeleryExecutor
+    AIRFLOW__API_AUTH__JWT_SECRET: lPJ3GQ8iWtIWyymvJ_Da7_MmTtGP_GoCo5DOKgXgDM8CAEKa6U3akE2RDrPaiPb
     AIRFLOW__CORE__AUTH_MANAGER: airflow.providers.fab.auth_manager.fab_auth_manager.FabAuthManager
     AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
     AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
@@ -91,7 +92,7 @@ x-airflow-common:
     
 services:
   postgres:
-    image: postgres:16
+    image: postgres:13
     environment:
       POSTGRES_USER: airflow
       POSTGRES_PASSWORD: airflow
@@ -148,7 +149,6 @@ services:
       retries: 5
       start_period: 30s
     restart: always
-    build: .
     depends_on:
       <<: *airflow-common-depends-on
       airflow-init:
@@ -187,13 +187,18 @@ services:
       # See https://airflow.apache.org/docs/docker-stack/entrypoint.html#signal-propagation
       DUMB_INIT_SETSID: "0"
     restart: always
-    build: .
     depends_on:
       <<: *airflow-common-depends-on
       airflow-apiserver:
         condition: service_healthy
       airflow-init:
         condition: service_completed_successfully 
+    volumes:
+      - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
+      - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
+      - ${AIRFLOW_PROJ_DIR:-.}/config:/opt/airflow/config
+      - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
+      - ${AIRFLOW_PROJ_DIR:-.}/include:/opt/airflow/include
 
   airflow-triggerer:
     <<: *airflow-common
@@ -208,7 +213,7 @@ services:
     depends_on:
       <<: *airflow-common-depends-on
       airflow-init:
-        condition: service_completed_successfully   
+        condition: service_completed_successfully
 
   airflow-init:
     <<: *airflow-common
