@@ -3,6 +3,9 @@
 Production-grade data platform that ingests complaints data from multiple channels (S3 CSV/JSON, Google Sheets, Postgres) into an S3 raw layer, models it into BigQuery via dbt, and orchestrates everything with Apache Airflow running in Docker.
 
 ## Architecture (conceptual)
+
+
+
 - Airflow (CeleryExecutor) orchestrates extraction from S3 buckets, transactional Postgres, and Google Sheets.
 - Raw data is landed in an S3 data lake as Parquet with load metadata.
 - dbt targets BigQuery (sample Terraform provided) to build curated marts (e.g., fact_complaints) for analytics/ML.
