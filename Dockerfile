@@ -24,3 +24,4 @@ RUN mkdir -p /opt/airflow/dags /opt/airflow/include
 
 COPY dags/ /opt/airflow/dags/
 COPY include/ /opt/airflow/include/
+COPY plugins/ /opt/airflow/plugins/
